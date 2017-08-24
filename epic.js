@@ -1,5 +1,6 @@
 const Rx = require('rxjs')
+const { combineEpics } = require('redux-observable')
 
-module.exports = (action$, store, { feathers }) => {
-  return Rx.Observable.empty()
-}
+module.exports = combineEpics(
+  require('./resources/dux').epic
+)

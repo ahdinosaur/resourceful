@@ -2,11 +2,28 @@
 
 manage personal inventory
 
+![screenshot](./screenshot.png)
+
+## get started
+
+```sh
+git clone git@github.com:ahdinosaur/resourceful
+cd resourceful
+npm run db migrate:latest
+npm start
+```
+
 ## stories
 
-- when i receive a new resource, i want to add it to my resource tree
-- when i'm looking for a resource, i can search my resource tree
-- when i use / move a resource, i can update my resource tree
+- when i want to add a new resource (from the "inbox"),
+  - [x] i can add to my resources
+- when i'm looking for a resource,
+  - [ ] i can search my resources by name, description, category
+- when i use / move a resource,
+  - [ ] i can update my resources
+- when i want to purge resources,
+  - [ ] i can remove from my resources
+  - [ ] i can see what i haven't updated, searched, or viewed in the last year
 
 ## license
 

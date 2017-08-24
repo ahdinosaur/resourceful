@@ -1,7 +1,6 @@
 module.exports = {
   fontNode: '#app-fonts',
-  theme: {
-  },
+  theme: require('./app/theme'),
   setup: (renderer) => {
   }
 }
