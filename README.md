@@ -2,6 +2,8 @@
 
 manage personal inventory
 
+made using [dogstack](https://github.com/root-systems/dogstack) :dog: :dog: :dog:
+
 ![screenshot](./screenshot.png)
 
 ## get started
