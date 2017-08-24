@@ -1,0 +1,40 @@
+{
+  "name": "resourceful",
+  "version": "0.0.0",
+  "description": "manage personal inventory",
+  "main": "index.js",
+  "scripts": {
+    "start": "dog dev server",
+    "test": "dog test",
+    "lint": "dog lint",
+    "db": "dog db"
+  },
+  "browserify": {
+    "transform": [
+      "es2040"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ahdinosaur/resourceful.git"
+  },
+  "keywords": [],
+  "author": "Mikey <michael.williams@enspiral.com> (http://dinosaur.is)",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/ahdinosaur/resourceful/issues"
+  },
+  "homepage": "https://github.com/ahdinosaur/resourceful#readme",
+  "devDependencies": {
+    "sqlite3": "^3.1.8"
+  },
+  "dependencies": {
+    "dogstack": "^0.4.0",
+    "es2040": "^1.2.6",
+    "feathers-knex": "^2.7.2",
+    "react": "^15.6.1",
+    "react-hyperscript": "^3.0.0",
+    "react-router": "^4.1.2",
+    "rxjs": "^5.4.3"
+  }
+}
