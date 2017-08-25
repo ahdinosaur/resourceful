@@ -19,15 +19,20 @@ module.exports = compose(
         service: 'resources',
         id: props.match.resourceId,
         params: {},
+      },
+      {
+        service: 'resources',
+        params: {}
       }
     ]
   })
 )(props => {
-  const { resource, actions } = props
+  const { resource, resources, actions } = props
   if (isNil(resource)) return null
   return h('div', [
     h(ResourceEditor, {
       resource,
+      resources,
       onSubmit: (nextResource) => {
         actions.resources.update(resource.id, nextResource)
       }

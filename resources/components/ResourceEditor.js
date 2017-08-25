@@ -1,6 +1,6 @@
 const h = require('react-hyperscript')
 const { reduxForm: connectForm, Field } = require('redux-form')
-const { isNil, merge } = require('ramda')
+const { prepend, pipe, values, map, isNil, merge } = require('ramda')
 const { connect: connectFela } = require('react-fela')
 const { compose } = require('recompose')
 
@@ -22,7 +22,7 @@ const ResourceForm = compose(
   connectFela(styles),
   connectForm({})
 )(props => {
-  const { styles, handleSubmit, resource } = props
+  const { styles, handleSubmit, resources, resource } = props
 
   return h('form', {
     className: styles.form,
@@ -43,6 +43,15 @@ const ResourceForm = compose(
         component: 'textarea'
       })
     ]),
+    h('fieldset', [
+      h('label', 'contained by resource'),
+      h(Field, {
+        name: 'containedByResourceId',
+        component: 'select'
+      }, [
+        getContainers(resources)
+      ])
+    ]),
     h('button', {
       type: 'submit'
     }, [
@@ -50,6 +59,24 @@ const ResourceForm = compose(
     ])
   ])
 })
+
+const getContainers = pipe(
+  values,
+  map(resource => {
+    return h('option', {
+      key: resource.id,
+      value: resource.id
+    }, [
+      resource.name
+    ])
+  }),
+  prepend(h('option', {
+    key: null,
+    value: null
+  }, [
+    '-- none --'
+  ]))
+)
 
 function submitText (resource) {
   return isNil(resource) ? 'create' : 'update'

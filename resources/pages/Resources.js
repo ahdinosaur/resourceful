@@ -27,9 +27,10 @@ module.exports = compose(
   const { resources, actions } = props
   return h('div', [
     h(ResourceSearch, {
-
+      resources
     }),
     h(ResourceEditor, {
+      resources,
       onSubmit: actions.resources.create
     }),
     viewResources(resources)
