@@ -2,6 +2,7 @@ const h = require('react-hyperscript')
 const { compose } = require('recompose')
 const {} = require('ramda')
 const { connect: connectFela } = require('react-fela')
+const { Link } = require('react-router-dom')
 
 const styles = require('../styles/ResourceViewer')
 
@@ -14,15 +15,14 @@ const ResourceViewer = compose(
   return h('div', {
     className: styles.container
   }, [
-    h('div', {
-      className: styles.name
+    h(Link, {
+      to: `/r/${resource.id}`
     }, [
-      name
-    ]),
-    h('div', {
-      className: styles.description
-    }, [
-      description
+      h('div', {
+        className: styles.name
+      }, [
+        name
+      ])
     ])
   ])
 })

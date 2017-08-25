@@ -17,12 +17,23 @@ npm start
 
 ## stories
 
+- when i view a resource, i can get
+  - [x] name
+  - [x] description
+  - [ ] image
+  - [ ] containedByResource
+  - [ ] containsResources
+- when i init or edit a resource, i can create or update
+  - [x] name
+  - [x] description
+  - [ ] image
+  - [ ] containedByResource
 - when i want to add a new resource (from the "inbox"),
   - [x] i can add to my resources
-- when i'm looking for a resource,
+- when i'm searching for a resource,
   - [ ] i can search my resources by name, description, category
 - when i use / move a resource,
-  - [ ] i can update my resources
+  - [x] i can update my resources
 - when i want to purge resources,
   - [ ] i can remove from my resources
   - [ ] i can see what i haven't updated, searched, or viewed in the last year
