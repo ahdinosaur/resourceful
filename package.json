@@ -7,7 +7,11 @@
     "start": "dog dev server",
     "test": "dog test",
     "lint": "dog lint",
-    "db": "dog db"
+    "db": "dog db",
+    "service:start": "docker-compose up --build",
+    "service": "docker-compose",
+    "service:sql": "docker-compose run postgres psql -h postgres -U postgres",
+    "service:run": "docker-compose run web npm run"
   },
   "browserify": {
     "transform": [
@@ -25,15 +29,14 @@
     "url": "https://github.com/ahdinosaur/resourceful/issues"
   },
   "homepage": "https://github.com/ahdinosaur/resourceful#readme",
-  "devDependencies": {
-    "sqlite3": "^3.1.8"
-  },
+  "devDependencies": {},
   "dependencies": {
     "dogstack": "^0.4.0",
     "es2040": "^1.2.6",
     "feathers-action": "^2.3.1",
     "feathers-action-react": "^2.2.1",
     "feathers-knex": "^2.7.2",
+    "pg": "^7.2.0",
     "ramda": "^0.24.1",
     "react": "^15.6.1",
     "react-fela": "^5.2.1",

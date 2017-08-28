@@ -1,0 +1,19 @@
+version: '2'
+services:
+  web:
+    build: .
+    command: npm start
+    volumes:
+      - .:/usr/app/
+      - /usr/app/node_modules
+    ports:
+      - "3000:3000"
+    links:
+      - postgres
+    environment:
+      DATABASE_URL: postgres://resourceful@postgres/resourceful
+  postgres:
+    image: postgres:alpine
+    environment:
+      POSTGRES_USER: resourceful
+      POSTGRES_DB: resourceful

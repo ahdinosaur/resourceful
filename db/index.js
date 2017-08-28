@@ -10,28 +10,22 @@ module.exports = {
   },
 
   development: {
-    client: 'sqlite3',
-    connection: {
-      filename: join(__dirname, 'dev.sqlite')
-    },
-    useNullAsDefault: true
+    client: 'postgres',
+    connection: process.env.DATABASE_URL
   },
 
   test: {
-    client: 'sqlite3',
-    connection: {
-      filename: ':memory:'
-    },
-    useNullAsDefault: true
+    client: 'postgres',
+    connection: process.env.DATABASE_URL
   },
 
   staging: {
     client: 'postgresql',
-    connection: process.env.DATABASE_URL,
+    connection: process.env.DATABASE_URL
   },
 
   production: {
     client: 'postgresql',
-    connection: process.env.DATABASE_URL,
+    connection: process.env.DATABASE_URL
   }
 }
