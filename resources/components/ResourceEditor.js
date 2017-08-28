@@ -22,11 +22,13 @@ const ResourceForm = compose(
   connectFela(styles),
   connectForm({})
 )(props => {
-  const { styles, handleSubmit, resources, resource } = props
+  const { styles, onSubmit, handleSubmit, resources, resource } = props
 
   return h('form', {
     className: styles.form,
-    onSubmit: handleSubmit
+    onSubmit: handleSubmit(data => {
+      onSubmit(data)
+    })
   }, [
     h('fieldset', [
       h('label', 'name'),

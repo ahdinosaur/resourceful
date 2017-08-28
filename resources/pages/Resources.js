@@ -1,7 +1,7 @@
 const h = require('react-hyperscript')
-const { compose } = require('recompose')
+const { compose, withState } = require('recompose')
 const { connect: connectFeathers } = require('feathers-action-react')
-const { pipe, values, map } = require('ramda')
+const { tap, pipe, values, map, toPairs, filter, fromPairs, isNil, apply, assoc, __, not, prop } = require('ramda')
 
 const getResourcesPageProps = require('../getters/getResourcesPageProps')
 const resourcesActions = require('../dux').actions
@@ -11,31 +11,63 @@ const ResourceEditor = require('../components/ResourceEditor')
 const ResourceViewer = require('../components/ResourceViewer')
 
 module.exports = compose(
+  withState('params', 'setParams', {}),
   connectFeathers({
     selector: getResourcesPageProps,
     actions: {
       resources: resourcesActions
     },
-    query: [
+    query: ({ params }) => [
       {
         service: 'resources',
-        params: {}
+        params: {
+          query: paramsToQuery(params)
+        }
       }
-    ]
+    ],
+    shouldQueryAgain: (props, status, prevProps) => {
+      return (props.params !== prevProps.params) 
+    }
   })
 )(props => {
-  const { resources, actions } = props
+  const { resources, setParams, searchedResources, actions } = props
   return h('div', [
     h(ResourceSearch, {
-      resources
+      resources,
+      onSubmit: (data) => setParams(data)
     }),
     h(ResourceEditor, {
       resources,
       onSubmit: actions.resources.create
     }),
-    viewResources(resources)
+    viewResources(searchedResources)
   ])
 })
+
+const filterEmptyValues = pipe(
+  toPairs,
+  filter(pipe(
+    prop(1),
+    isNil,
+    not
+  )),
+  fromPairs
+)
+
+const toSinglePairs = pipe(
+  toPairs,
+  map(apply(assoc(__, __, {})))
+)
+
+const paramsToQuery = pipe(
+  tap(console.log.bind(console)),
+  filterEmptyValues,
+  tap(console.log.bind(console)),
+  toSinglePairs,
+  tap(console.log.bind(console)),
+  assoc('fuzzyMatch', __, {}),
+  tap(console.log.bind(console))
+)
 
 const viewResources = pipe(
   values,

@@ -19,7 +19,7 @@ const ResourceSearch = compose(
     onSubmit: handleSubmit
   }, [
     h(Field, {
-      name: 'text',
+      name: 'name',
       type: 'text',
       component: 'input'
     }),
