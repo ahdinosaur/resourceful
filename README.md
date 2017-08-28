@@ -11,8 +11,10 @@ made using [dogstack](https://github.com/root-systems/dogstack) :dog: :dog: :dog
 ```sh
 git clone git@github.com:ahdinosaur/resourceful
 cd resourceful
-npm run db migrate:latest
-npm start
+# install docker-compose
+#   https://docs.docker.com/compose/install/
+npm run service:start
+npm run service:run db migrate:latest
 ```
 
 ## data model
