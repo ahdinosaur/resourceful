@@ -15,6 +15,46 @@ npm run db migrate:latest
 npm start
 ```
 
+## data model
+
+### resource
+
+```js
+table.string('name')
+table.text('description')
+table.text('image')
+TODO table.integet('resourceTypeId').references('resourceType.id')
+table.integer('containedByResourceId').references('resources.id')
+```
+
+### resource type
+
+TODO
+
+```js
+table.string('name')
+table.text('description')
+table.text('image')
+table.integer('containedByResourceTypeId').references('resourceTypes.id')
+```
+
+### TODO about
+
+```js
+table.timestamp('startTime')
+table.string('name')
+table.text('description')
+table.text('image')
+```
+
+### TODO move
+
+```js
+table.timestamp('startTime')
+table.string('containerId')
+table.string('containsId')
+```
+
 ## stories
 
 - when i view a resource, i can get
