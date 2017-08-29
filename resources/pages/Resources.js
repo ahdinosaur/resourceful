@@ -30,7 +30,7 @@ module.exports = compose(
     }
   })
 )(props => {
-  const { resources, setParams, searchedResources, actions } = props
+  const { resources, setParams, actions } = props
   return h('div', [
     h(ResourceSearch, {
       resources,
@@ -40,7 +40,7 @@ module.exports = compose(
       resources,
       onSubmit: actions.resources.create
     }),
-    viewResources(searchedResources)
+    viewResources(resources)
   ])
 })
 
