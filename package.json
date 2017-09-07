@@ -31,6 +31,7 @@
   "homepage": "https://github.com/ahdinosaur/resourceful#readme",
   "devDependencies": {},
   "dependencies": {
+    "@f/create-action": "^1.1.1",
     "dogstack": "^0.4.0",
     "es2040": "^1.2.6",
     "feathers-action": "^2.3.1",

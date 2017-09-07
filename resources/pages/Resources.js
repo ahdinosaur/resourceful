@@ -4,18 +4,18 @@ const { connect: connectFeathers } = require('feathers-action-react')
 const { tap, pipe, values, map, toPairs, filter, fromPairs, isNil, apply, assoc, __, not, prop } = require('ramda')
 
 const getResourcesPageProps = require('../getters/getResourcesPageProps')
-const resourcesActions = require('../dux').actions
+const { resources: resourcesActions, search: searchActions } = require('../../actions')
 
 const ResourceSearch = require('../components/ResourceSearch')
 const ResourceEditor = require('../components/ResourceEditor')
 const ResourceViewer = require('../components/ResourceViewer')
 
 module.exports = compose(
-  withState('params', 'setParams', {}),
   connectFeathers({
     selector: getResourcesPageProps,
     actions: {
-      resources: resourcesActions
+      resources: resourcesActions,
+      search: searchActions
     },
     query: ({ params }) => [
       {
@@ -26,21 +26,23 @@ module.exports = compose(
       }
     ],
     shouldQueryAgain: (props, status, prevProps) => {
-      return (props.params !== prevProps.params) 
+      const { searchParams } = props.selected
+      const { searchParams: prevSearchParams } = prevProps.selected
+      return searchParams !== prevSearchParams
     }
   })
 )(props => {
-  const { resources, setParams, actions } = props
+  const { resources, searchedResources, actions } = props
   return h('div', [
     h(ResourceSearch, {
       resources,
-      onSubmit: (data) => setParams(data)
+      onSubmit: (data) => actions.search.setParams(data)
     }),
     h(ResourceEditor, {
       resources,
       onSubmit: actions.resources.create
     }),
-    viewResources(resources)
+    viewResources(searchedResources)
   ])
 })
 
@@ -60,13 +62,9 @@ const toSinglePairs = pipe(
 )
 
 const paramsToQuery = pipe(
-  tap(console.log.bind(console)),
   filterEmptyValues,
-  tap(console.log.bind(console)),
   toSinglePairs,
-  tap(console.log.bind(console)),
-  assoc('fuzzyMatch', __, {}),
-  tap(console.log.bind(console))
+  assoc('fuzzyMatch', __, {})
 )
 
 const viewResources = pipe(
