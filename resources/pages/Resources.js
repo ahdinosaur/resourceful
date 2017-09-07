@@ -6,8 +6,9 @@ const { tap, pipe, values, map, toPairs, filter, fromPairs, isNil, apply, assoc,
 const getResourcesPageProps = require('../getters/getResourcesPageProps')
 const { resources: resourcesActions, search: searchActions } = require('../../actions')
 
-const ResourceSearch = require('../components/ResourceSearch')
+const ResourceNav = require('../components/ResourceNav')
 const ResourceEditor = require('../components/ResourceEditor')
+const ResourceSearch = require('../components/ResourceSearch')
 const ResourceViewer = require('../components/ResourceViewer')
 
 module.exports = compose(
@@ -32,15 +33,18 @@ module.exports = compose(
     }
   })
 )(props => {
-  const { resources, searchedResources, actions } = props
+  const { resources, topResources, searchedResources, actions } = props
   return h('div', [
-    h(ResourceSearch, {
-      resources,
-      onSubmit: (data) => actions.search.setParams(data)
+    h(ResourceNav, {
+      resources: topResources
     }),
     h(ResourceEditor, {
       resources,
       onSubmit: actions.resources.create
+    }),
+    h(ResourceSearch, {
+      resources,
+      onSubmit: (data) => actions.search.setParams(data)
     }),
     viewResources(searchedResources)
   ])
